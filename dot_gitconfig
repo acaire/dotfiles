@@ -1,0 +1,14 @@
+[user]
+name = Ash Caire
+email = acaire@users.noreply.github.com
+
+[alias]
+undo = reset --soft HEAD^
+co = checkout
+dw = diff --color-words
+
+[filter "lfs"]
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
