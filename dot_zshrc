@@ -1,0 +1,50 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+export EDITOR=vim
+export GOPATH=~/code/go
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
+zstyle ':omz:update' mode reminder  # remind me to update when it's time
+HIST_STAMPS="yyyy-mm-dd"
+plugins=(aws git kubectl)
+source $ZSH/oh-my-zsh.sh
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+export PATH=$PATH:~/bin
+
+alias k='kubectl'
+
+# https://github.com/danielfoehrKn/kubeswitch/blob/master/docs/installation.md
+INSTALLATION_PATH=$(brew --prefix switch) && source $INSTALLATION_PATH/switch.sh
+
+# https://github.com/romkatv/powerlevel10k
+source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Krew path
+export PATH="${PATH}:${HOME}/.krew/bin"
+
+# Add gcloud components to path such as as gke-gcloud-auth-plugin
+source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+eval "$(direnv hook zsh)"
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+export GOPATH=~/code
+
+# disable AUTO_CD
+setopt noautocd
