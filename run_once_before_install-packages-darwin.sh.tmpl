@@ -1,0 +1,38 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+# Sources
+tap "danielfoehrkn/switch"
+tap "railwaycat/emacsmacport"
+tap "romkatv/powerlevel10k"
+
+# CLI Formulae
+brew "cmake" # emacs vterm
+brew "danielfoehrkn/switch/switch" #kube
+brew "git"
+brew "go"
+brew "helm"
+brew "imagemagick"
+brew "jq"
+brew "krew"
+brew "kubectl"
+brew "kubectx"
+brew "railwaycat/emacsmacport/emacs-mac"
+brew "ripgrep"
+brew "romkatv/powerlevel10k/powerlevel10k"
+brew "stern"
+brew "tig"
+brew "yq"
+
+# GUI formulae
+cask "1password"
+cask "firefox"
+cask "hammerspoon"
+cask "iterm2"
+
+# App Store
+mas "slack", id:803453959
+
+EOF
+{{ end -}}
