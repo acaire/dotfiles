@@ -2,3 +2,8 @@
     type = "git-repo"
     url = "https://github.com/ohmyzsh/ohmyzsh.git"
     refreshPeriod = "168h"
+
+[".config/emacs"]
+    type = "git-repo"
+    url = "https://github.com/hlissner/doom-emacs.git"
+    refreshPeriod = "168h"
