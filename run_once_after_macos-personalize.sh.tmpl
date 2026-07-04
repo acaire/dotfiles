@@ -1,0 +1,35 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+# Show battery percentage in toolbar
+defaults write com.apple.controlcenter BatteryShowPercentage -bool true
+
+# Remove all persistent apps from dock
+python3 -c "
+import plistlib, os, subprocess
+path = os.path.expanduser('~/Library/Preferences/com.apple.dock.plist')
+with open(path, 'rb') as f:
+    p = plistlib.load(f)
+p['persistent-apps'] = []
+with open(path, 'wb') as f:
+    plistlib.dump(p, f)
+subprocess.run(['killall', 'Dock'])
+"
+
+# Reduce dock size
+defaults write com.apple.dock tilesize -int 30
+
+# Hide dock
+defaults write com.apple.dock autohide -bool true
+killall Dock
+
+# Set 24 hour time and show seconds
+defaults write -g AppleICUForce24HourTime -bool true
+defaults write com.apple.menuextra.clock ShowSeconds -bool true
+killall ControlCenter
+
+# Move screenshots
+mkdir -p ~/screenshots
+defaults write com.apple.screencapture "location" -string "~/screenshots"
+killall SystemUIServer
+{{ end -}}

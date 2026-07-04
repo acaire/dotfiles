@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "configurePresets": [
+    {
+      "name": "local",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "$env{HOME}/.local",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_FLAGS": "-w",
+        "CMAKE_CXX_FLAGS": "-w",
+        "CMAKE_INSTALL_RPATH": "$env{HOME}/.local/lib",
+        "CMAKE_OSX_SYSROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "GGML_LTO": "ON",
+        "GGML_METAL_NDEBUG": "ON",
+        "GGML_NATIVE": "ON",
+        "OpenMP_ROOT": "/opt/homebrew/opt/libomp"
+      }
+    }
+  ]
+}

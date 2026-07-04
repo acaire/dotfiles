@@ -1,0 +1,4 @@
+["~/code/llama.cpp"]
+    type = "git-repo"
+    url = "https://github.com/ggml-org/llama.cpp.git"
+    refreshPeriod = "168h"
