@@ -1,0 +1,4 @@
+auto-update = off
+copy-on-select = true
+right-click-action = copy-or-paste
+selection-clear-on-copy = true
