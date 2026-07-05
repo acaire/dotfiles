@@ -1,3 +1,9 @@
+export EDITOR=vim
 export PATH=$PATH:~/.local/bin
 
 alias llm='llama serve -m Qwen3.6-27B-UD-Q5_K_XL.gguf --host 0.0.0.0 --spec-type draft-mtp --spec-draft-n-min 2 --spec-draft-n-max 5 --spec-draft-type-k q8_0 --spec-draft-type-v q8_0'
+
+# Make ctrl-x ctrl-e work
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
