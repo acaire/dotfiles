@@ -12,4 +12,31 @@ bindkey "^X^E" edit-command-line
 # Make home/end keys work
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
+
+# ---- Tab completion: interactive highlighted menu ----
+autoload -Uz compinit && compinit
+zmodload zsh/complist
+
+setopt auto_list
+setopt auto_menu
+setopt auto_param_slash
+setopt complete_in_word
+
+zstyle ':completion:*' menu select
+
+# Colourise the list
+if [[ -n "$LS_COLORS" ]]; then
+  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+else
+  zstyle ':completion:*' list-colors ''
+fi
+
+# Fuzzy matching: case-insensitive + match substrings anywhere
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=*'
+zstyle ':completion:*' keep-prefix
+
+# Inside the menu: Tab forward, Shift-Tab backward
+bindkey -M menuselect '^I' menu-select
+bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
+
 {{ end -}}
